@@ -44,7 +44,6 @@ func main() {
 	fmt.Println(z)       //变量值
 	person1.name = "bob" // 结构体字段赋值
 
-	fmt.Println("var scale type %s")
 	count[x] = count[x] * scale // 数组、slice或map的元素赋值
 
 	q1 := [...]int{1, 2, 3} //简短变量声明
