@@ -4,10 +4,10 @@ import (
 	"fmt"
 )
 
-//包级别变量声明
-var x1 int
-var y1 string
-var z1 bool
+//包级别变量声明,
+var x1 int    // assign zero value
+var y1 string // assign zero value
+var z1 bool   // assign zero value
 
 type intJx int //自定义变量声明
 
@@ -31,16 +31,19 @@ func main() {
 	x, y, z := 42, "james,", false //简短变量声明,类型由初始化表达式推导 int, string, bool
 	fmt.Println(x, y, z)
 
-	fmt.Println(x1, y1, z1)        //包级别声明的变量会在main入口函数执行前完成初始化
-	x1, y1, z1 = 45, "nihao", true //赋值
-	fmt.Println(x1, y1, z1)
+	foo()
+	fmt.Println("inside main", x1, y1, z1) //包级别声明的变量会在main入口函数执行前完成初始化
+	x1, y1, z1 = 45, "nihao", true         //赋值
+	fmt.Println("inside main", x1, y1, z1)
+	foo()
 
 	fmt.Println(intJx)
 
-	x = 1                // 变量的赋值
-	p := &z              //一个指针对应变量在内存中的存储位置
-	*p = true            // 通过指针间接赋值
-	fmt.Println(p)       //变量的内存地址
+	x = 1          // 变量的赋值
+	p := &z        //一个指针对应变量在内存中的存储位置
+	*p = true      // 通过指针间接赋值
+	fmt.Println(p) //变量的内存地址
+	fmt.Printf("p is type of %T\n", p)
 	fmt.Println(z)       //变量值
 	person1.name = "bob" // 结构体字段赋值
 
@@ -71,10 +74,17 @@ func main() {
 		GBP                 // 英镑
 		RMB                 // 人民币
 	)
+	fmt.Printf("USD type is %T\n", USD)
+
 	symbol := [...]string{USD: "$", EUR: "€", GBP: "￡", RMB: "￥"}
 	fmt.Println(RMB, symbol[RMB]) // "3 ￥"
 	for i, v := range symbol {
 		fmt.Printf("%d %s\n", i, v)
 	}
 
+}
+
+// access the package scope variables
+func foo() {
+	fmt.Println("inside foo", x1, y1, z1)
 }
