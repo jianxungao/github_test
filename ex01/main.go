@@ -10,6 +10,7 @@ var y1 string // assign zero value
 var z1 bool   // assign zero value
 
 type intJx int //自定义变量声明
+var intjx intJx
 
 type person struct { //结构体类型声明
 	name string
@@ -23,21 +24,19 @@ var q = [...]int{1, 2, 3} //数组的长度是根据初始化值的个数来计�
 var count = [...]int{2, 3, 4, 5, 6, 7, 8, 9, 0, 1}
 
 func main() {
-	// var x = 42
-	// var y = "James Bond"
-	// var z = true
-
-	intJx := 3                     //简短变量声明
-	x, y, z := 42, "james,", false //简短变量声明,类型由初始化表达式推导 int, string, bool
+	x, y, z := 42, "james, b", false //简短变量声明,类型由初始化表达式推导 int, string, bool
 	fmt.Println(x, y, z)
+	s := fmt.Sprintf("Sprint:%v\t%v\t%v\n", x, y, z)
+	fmt.Println(s)
+
+	intjx = 3
+	fmt.Printf("var:intjx value is %v and it's type of %T\n", intjx, intjx)
 
 	foo()
 	fmt.Println("inside main", x1, y1, z1) //包级别声明的变量会在main入口函数执行前完成初始化
 	x1, y1, z1 = 45, "nihao", true         //赋值
 	fmt.Println("inside main", x1, y1, z1)
 	foo()
-
-	fmt.Println(intJx)
 
 	x = 1          // 变量的赋值
 	p := &z        //一个指针对应变量在内存中的存储位置
