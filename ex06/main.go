@@ -57,7 +57,7 @@ func sum(x ...int) int {
 	return total
 }
 
-//callback - pass a func as argument
+//callback - func accept a func as argument
 func even(f func(x ...int) int, vi ...int) int {
 	var yi []int
 	for _, v := range vi {
@@ -66,6 +66,15 @@ func even(f func(x ...int) int, vi ...int) int {
 		}
 	}
 	return f(yi...)
+}
+
+//closure demo - func return a func
+func incr() func() int {
+	var x int           // enclosing variable x
+	return func() int { //returned func itself return a int
+		x++
+		return x
+	}
 }
 
 func main() {
@@ -99,7 +108,17 @@ func main() {
 	ii := []int{2, 5, 6, 8, 9}          //slice of int
 	fmt.Println("the sum:", sum(ii...)) //unfold
 
-	s := even(sum, ii...) // callback func accept a func as argument
+	s := even(sum, ii...) // callback pass a func as argument
 	fmt.Println("the sum of even number:", s)
+
+	//closure demo
+	c1 := incr()
+	c2 := incr()
+	fmt.Println(c1())
+	fmt.Println(c1())
+	fmt.Println(c1())
+	fmt.Println(c1())
+	fmt.Println(c2())
+	fmt.Println(c2())
 
 }
