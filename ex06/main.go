@@ -14,13 +14,21 @@ type agent struct {
 	ltk bool
 }
 
-//interface any type has speak method, it is human
+//interface: any type has speak method, it's human
 type human interface {
 	speak()
 }
 
 // polymorphism
 func bar(h human) {
+	switch h.(type) { // asserting what type it is
+	case agent:
+		fmt.Println(" - agent - ", h.(agent).first)
+	case person:
+		fmt.Println(" - person -", h.(person).first)
+	default:
+		fmt.Println(" : - ")
+	}
 	fmt.Println("I was passed into bar", h)
 }
 
@@ -50,5 +58,14 @@ func main() {
 
 	bar(agent007)
 	bar(person1)
+
+	func(x int) {
+		fmt.Println("anonymous func with para", x)
+	}(42)
+
+	f := func(x int) {
+		fmt.Println("func expression", x)
+	}
+	f(42)
 
 }
