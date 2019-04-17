@@ -42,6 +42,32 @@ func (p person) speak() {
 	fmt.Println("I am", p.first, p.last, " - the person speak")
 }
 
+// function return a function
+func rf() func() int {
+	return func() int {
+		return 45
+	}
+}
+
+func sum(x ...int) int {
+	total := 0
+	for _, v := range x {
+		total += v
+	}
+	return total
+}
+
+//callback - pass a func as argument
+func even(f func(x ...int) int, vi ...int) int {
+	var yi []int
+	for _, v := range vi {
+		if v%2 == 0 {
+			yi = append(yi, v)
+		}
+	}
+	return f(yi...)
+}
+
 func main() {
 	agent007 := agent{
 		person: person{ //composite literal
@@ -67,5 +93,13 @@ func main() {
 		fmt.Println("func expression", x)
 	}
 	f(42)
+
+	fmt.Println(rf()()) //call the function which return anoter func and run it
+
+	ii := []int{2, 5, 6, 8, 9}          //slice of int
+	fmt.Println("the sum:", sum(ii...)) //unfold
+
+	s := even(sum, ii...) // callback func accept a func as argument
+	fmt.Println("the sum of even number:", s)
 
 }
