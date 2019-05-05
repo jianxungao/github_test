@@ -19,7 +19,7 @@ type human interface {
 	speak()
 }
 
-// polymorphism
+// polymorphism 1
 func bar(h human) {
 	switch h.(type) { // asserting what type it is
 	case agent:
@@ -30,6 +30,11 @@ func bar(h human) {
 		fmt.Println(" : - ")
 	}
 	fmt.Println("I was passed into bar", h)
+}
+
+// polymorphism 2
+func saySomething(h human) {
+	h.speak()
 }
 
 // method of agent
@@ -93,6 +98,9 @@ func main() {
 
 	bar(agent007)
 	bar(person1)
+
+	saySomething(person1)
+	saySomething(agent007)
 
 	func(x int) {
 		fmt.Println("anonymous func with para", x)
